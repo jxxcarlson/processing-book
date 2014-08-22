@@ -1,0 +1,113 @@
+== Random squares
+
+
+
+.Random Squares
+video::22[width=400]
+
+
+In this lesson we learn how to use random numbers to create moving images.  Watch the film _Random Squares_.  You will see random squares of random color popping into existence on the screen.  After a time, the program builds a kind of random mosaic.  The script for +draw+ is as follows:
+
+. Choose a random position +x+, +y+ for a box.
+. Choose a random color
+. Draw a box at +x+, +y+ with the given color
+
+This script is repeated 12 times a second: see +frameRate(12)+ below.
+
+The main subtlety in the program lies in the generation of random numbers.  The function +random(a,b)+ returns a random floating point number between +a+ and +b+.  Thus +random(0,1)+ might return 0.7382.  For the x,y position of the upper corners of the small boxes we want whole numbers (integers) in the the range 0..400, where the screen is 400x400 pixels. We also want these integers to be divisible by the length of a side of a box, measured in pixels.  That is what the code below for +random_number(max, quantum)+ does. 
+
+----
+// random_squares1.pde
+
+int grid_size = 20;
+int color_quantum = 10;
+
+int random_number(int max, int quantum) {
+  float n_quanta = float(max)/quantum;
+  int random_number = int(random(0,n_quanta));
+  return quantum*random_number;
+}
+
+void setup() {
+
+  size(400,400);
+  background(0);
+  noStroke();
+  frameRate(12);
+}
+
+void draw() {
+
+  int x = random_number(400,grid_size);
+  int y = random_number(400,grid_size);
+  
+  int r = random_number(255,color_quantum);
+  int b = random_number(255,color_quantum);
+  
+  fill(r, 0, b);
+  rect(x,y,grid_size,grid_size);
+
+  saveFrame("####.tif");
+}
+----
+
+=== Discussion
+
+. The variable +grid_size+ defines the mesh size of a grid.  The squares drawn by the program fit in this grid..  The variable +color_quantum+ is smallest amount by which the color values R, G, B can change from box to box.   The color change is a multiple of +color_quantum+.
+
+. Consider the definition of the  function +random_number.  If +x+ is a floating poin t number the function call +int(x)+ returns a random number less than the largest whole number in +max+.  Thus _random_number(4,1)_ could return any of the four vlaues 0, 1, 2, 3.  The values of _random_number(10,3)_ could return any of the values 0, 3, 6, 9.
+
+. The body of +setup()+ 
+
+.. Set the window size and background color.
+.. Use noStroke() to suppress drawing the outline of the boxes.
+.. Use +frameRate+ to set the number of frames generated per second.  If you omit this statement, 24 frames will be generated each second.
+
+. The body of +draw()+ -- follow the script
+
+.. Call +random_number+ to set the values +x+, +y+ for the upper left corner of a small box.
+
+.. Call +random_number+ again to set the color values +r+ and +b+ -- red and blue.
+
+.. Set the fill color and draw the box.
+
+.. Save the current frame as a +.tif+ file. The film is made by viewing still frames in rapid succession.
+
+
+=== Program outline
+
+____
+Variable definitions (+grid_size+, +color_quantum+)
+
+Function definition (+random_number+)
+
++void setup() { ... }+
+
++void draw() {+ _follow script_ +}+
+____
+
+=== Defining new functions
+
+Consider the code
+----
+  int double(int n) {
+    return 2*n;
+}
+----
+It defines a function, +double+ that takes an integer as input and returns twice that integer as output.  Here is another function
+----
+  float tip_calcl(float amount, float tip_rate) {
+    return amount + (tip_rate/100.0)*amount;
+}
+----
+In this case the function has two parameters, both of which are floating point numbers.
+
+Function definitions follow the above pattern.  First comes a line with the name of the function.  Preceding the name is the data type of the value returned -- +int+ for whole numbers, +float+ for other numbers, etc.  After the function name is a list of parameters of the function.  Each parameter is preceded by code that gives its data type.
+      
+
+=== Exercises
+
+. Experiment with different color palettes.  In the film above, red and blue were varied randomly and independently, and green was set to zero.  You can let one color depend on the other, e.g., + fill(r, 0, 255-4)+ or +fill(r, r/2, 255 - r)+.  Or you can do something else entirely -- your eye is the judge of what works.
+
+. Experiment with other shapes.  Code like +ellipse(x,y,d,d)+
+will draw a circle.  There is also +triangle(x1,y1,x2,y2,x3,y3)+ function.  See http://processing.org/reference/triangle_.html[processing.org].  Of course there are other shapes as well: http://processing.org/reference/quad_.html[quadrilaterals], http://processing.org/reference/line_.html[lines], etc.

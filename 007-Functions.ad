@@ -1,0 +1,83 @@
+== Functions
+
+
+
+
+image::44[]
+
+----
+// nested_squares.pde
+
+  float grayLevel = 0;                
+  float grayLevelChange = 25;         
+  float inset = 0;             
+  float insetChange = 20;
+  
+  void initialize () {
+    size(400, 400); 
+    background(0);
+  }
+
+  void draw_figure() {
+    fill(grayLevel); 
+    rect(inset, inset, width-2*inset, height-2*inset);
+  }
+ 
+ void update() {
+   grayLevel = grayLevel + grayLevelChange;
+   inset = inset + insetChange;
+ } 
+ 
+void setup() {
+
+  initialize();
+       
+  for (int i = 0; i < 10; i++) { 
+    
+     draw_figure();
+     update();
+     
+  }   
+}    
+----
+
+blah blah
+
+----
+// nested_squares.pde
+          
+  float inset = 0;             
+  float insetChange = 20;
+  
+  void initialize () {
+    noStroke();
+    size(400, 400); 
+  }
+
+  void draw_figure(float r, float g, float b) { 
+    fill(r, g, b);;
+    rect(inset, inset, width-2*inset, height-2*inset);
+  }
+ 
+ void update() {
+   inset = inset + insetChange;
+   insetChange = 0.91*insetChange;
+ } 
+ 
+void setup() {
+
+  initialize();
+       
+  for (int i = 0; i < 11; i++) {  
+     draw_figure(50,70,10);
+     update();
+     draw_figure(200,220,120);
+     update();
+     
+  }
+  draw_figure(50,70,0);
+  
+  save("zebra-yg.png");
+}    
+----
+

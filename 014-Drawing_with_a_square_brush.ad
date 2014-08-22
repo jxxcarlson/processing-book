@@ -1,0 +1,76 @@
+== Drawing with a square brush
+
+
+.Magic marker
+video::55[]
+
+
+
+This is the first of a series of lessons on user interaction with Processing.  Watch the video _Magic marker_.  You see a drawing traced out on the screen as the user traces her finger along the mouse pad, drawing with virtual pen and ink.  One can use a graphics tablet for better effect, and that was done here for the production of _Magic marker_.
+
+The key to the program is in the functions +mouseX+ and +mouseY+, which report the current location of the mouse in Cartesian coordinates.   These coordinates track the location of the mouse a it moves over the trackpad, and so can be used as the arguments for a Processing drawing command.  Here we use  the command +rect(x,y,d,d)+, which draws a +dxd+ square with upper left corner at position +x, y+.
+
+To make the drawing more interesting, we use an alpha value of 50, so our ink is sem-transparent and so colors will mix.  We also change the color of the ink at each step by a small amount using the function +changeColor(c)+.  If we say 
+____
++c2 = changeColor(c1)+, 
+____
+where +c1+ is an RGB value, then +c2+ will be the new RGB value obtained by adding a small random number to +c1+.  If the modified value falls outside the range [0,255] of permissible RGB values, we put it back inside with a small adjustment.  Here, then, is our drawing tool:
+----
+void pen(int x, int y) {
+ 
+  r = changeColor(r);
+  g = changeColor(g);
+  b = changeColor(b);
+
+  fill(r,g,b,50);
+  rect(x,y,d,d);
+}
+----
+Five lines of code in +pen(x,y)+ do everything that is needed to make one mark. We change the color, apply this change to the ink, and then make the mark at the current mouse position as defined by +mouseX+, +mouseY+.
+
+Below, in the full program, you see how +square(x,y)+ is implemented.  There are four global variables, three used to store the current color, and one used to set the size of the pen tip.  In +setup()+, we set the window geometry and background and the initial ink color.  We also issue the command +noStroke()+ to suppress drawing an outline around the mark made by the pen.
+
+.*magic_marker.pde*
+----
+float r, g, b;
+float d = 30;
+
+void setup() {
+  size(600, 600);
+  background(0);
+  noStroke();
+  r=255; g = 255; b = 0;
+}
+
+
+void draw() {
+  pen(mouseX, mouseY);
+  saveFrame("frames/####.jpg");
+}
+
+void pen(int x, int y) {
+ 
+  r = changeColor(r);
+  g = changeColor(g);
+  b = changeColor(b);
+
+  fill(r,g,b,50);
+  rect(x,y,d,d);
+}
+
+float changeColor(float c) {
+ 
+  c += random(-20,20);
+
+  if (c < 0) {
+    c = c + 2;
+  }
+
+  if (c > 255) {
+    c = c - 2;
+  }
+
+  return c;
+}
+----
+

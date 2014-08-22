@@ -1,0 +1,141 @@
+== Bouncing Ball
+
+
+.Bouncing ball
+video::41[width=400]
+
+The aim of this lesson is to present a simple but fairly realistic
+physics simulation.  As shown in the video _Bouncing Ball_, we
+throw a blue ball to the right, let it drop under the influence of
+gravity, and watch it bounce off a hard surface.
+
+Since the program is longer than any of our previous programs, we
+present it first in outline form.  The first section will define
+variables such as the initial velocities, both horizontal and
+vertical, and constants such as the strength of gravity , etc. 
+The second section defines [term]#functions# to draw the ball, to
+update its position, and to clear the frame for the next image. 
+Functions are pieces of code that -- as the name indicates --
+perform a certain function, e.g., drawing the ball, updating its
+position, etc.  Functions are a bit like miniature programs.  They
+help to organize long pieces of code into shorter ones that are
+easy to understand.
+
+The third section is the +setup+ function, which is by now quite
+familiar.  The fourth and last section is the +draw+ function.  It
+contains four function calls: (1) +clear_frame()+, which paints
+the screen black, (2) +draw_ball()+, which draws the ball at its
+current position, (3) +update_ball()+, which gets the new position
+of the ball, and (4) +saveFrame+, which is needed only if we are
+recording video.  The +update_ball()+ function computes the
+position of the ball for the next frame, i.e., a short time
+interval later.
+
+.*Program outline*
+----
+
+// Define constants
+
+// Define functions
+
+void setup() {
+
+  size(400, 400);
+  background(0);
+  ellipseMode(CENTER);
+}
+
+void draw() {
+  
+    clear_frame();
+    draw_ball();
+    update_ball();
+    saveFrame("frames/####.jpg");
+}
+----
+
+Below is the full program text.  Let us discuss the variables and
+consants first.  We have to define velocities in two directions
++x+ and +y+.  These are the velocities +vx+ and +vy+.  The
+vertical force of gravity near the Earth's surface is nearly
+constant.  We give it the value +g = 0.1+.  The constant +k1+
+accounts for loss of velocity due to frictional force.  The larger
+it is, the faster the velocity of the ball slow down.  The
+constant +k2+ determines the energy loss for each bounce.  If +k2
+= 1.0+, the collision of the ball with the hard surface is
+perfectly elastic: no energy is lost.
+
+Let us now discuss the functions defined.
+
+- *+draw_ball()+* sets the fill color to blue, tells Processing
+not to draw an outline, and then draws a circles of diameter 20
+pixels centered at +(x,y)+
+
+- *+update_ball()+* is the most interesting function. It gives the
+new position of the ball, and it is the one place in the program
+which uses physics.
+
+
+.*Program*
+----
+
+// initial position
+float x = 10; 
+float y = 0;
+
+// initial velocity
+float vx = 2.5;
+float vy = 0;
+
+// physical constants
+float g = 0.1;
+float k1 = 0.006;
+float k2 = 0.95;
+
+void draw_ball() {
+  
+   fill(0,0,255);
+   noStroke();
+   ellipse(x,y,20,20);   
+}
+
+void update_ball() {
+  
+    // update x-coordinate
+    x = x + vx;
+    vx = vx - k1*vx;
+    
+    // update y-coordinate
+    y = y + vy;
+    vy = vy + g;
+    vy = vy - k1*vy;
+    
+    // bounce
+    if (y >= 400) {
+      vy = -k2*vy;
+    } 
+}  
+
+void clear_frame() {
+  
+    fill(0);
+    rect(0,0,400,400);
+}
+
+void setup() {
+
+  size(400, 400);
+  background(0);
+  ellipseMode(CENTER);
+  
+}
+
+void draw() {
+  
+    clear_frame();
+    draw_ball();
+    update_ball();
+    saveFrame("frames/####.jpg");
+}
+----
+

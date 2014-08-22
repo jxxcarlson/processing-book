@@ -1,13 +1,26 @@
-= Lorem Ipsum III
-Caius Incorrigibilus
+= Processing
+James A. Carlson
 v1.0, 2014-04-15
 :doctype: book
-:producer: Asciidoctor
+:producer: James Carlson
 :keywords: nonsense
 :copyright: CC-BY-SA 3.0
 :imagesdir: images
 :front-cover-image: image:cover.png[width=1050,height=1600]
 
-include::01.ad[What is Processing?]
-include::02.ad[Running a Processing Program]
-
+include::001-What_is_processing.ad[]
+include::002-Running_a_processing_program.ad[]
+include::003-Grayscale.ad[]
+include::004-Alpha.ad[]
+include::005-RGB.ad[]
+include::006-Nested_squares.ad[]
+include::007-Functions.ad[]
+include::008-Landscape.ad[]
+include::009-Animating_size.ad[]
+include::010-Animating_color.ad[]
+include::011-Bouncing_Ball.ad[]
+include::012-Random_squares.ad[]
+include::013-Random_squares_II.ad[]
+include::014-Drawing_with_a_square_brush.ad[]
+include::015-Tracking_speed.ad[]
+include::016-Changing_the_pen_tip.ad[]

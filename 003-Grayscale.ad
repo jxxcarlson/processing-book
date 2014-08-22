@@ -1,0 +1,136 @@
+== Grayscale
+
+
+
+
+[[gray_on_black]]
+.Gray on Black
+image::28[]
+
+Look at Figure 1.  The image, a gray square set in a black square,
+was created with the program below.  Our goal is to understand the
+program, then use it as a starting point for an original
+composition made of squares -- or rectangles -- in various shades
+of gray.
+
+----
+// gray_on_black.pde
+// Draw gray square on black square
+
+void setup() {
+
+  size(400, 400); 
+  background(0); 
+
+  fill(125);
+  rect(100,100,200,200); 
+}
+----
+
+=== Discussion
+
+
+*Paragraph 1* 
+
+- The function call +size(w,h)+ creates a window +w+ pixels wide
+and +h+ pixels tall. 
+- The function call +background(g)+ fills the window with a shade
+of gray.  If +g = 0+,
+the background is black.
+
+
+*Paragraph 2*
+
+
+- The function call +fill(g)+ sets the ``ink'' used for
+drawing/painting to a shade of gray.  If +g = 125+, the ink is a
+medium shade of gray.
+
+
+- The  function call +rect(x,y,w,h)+ draws a square with upper
+left corner at +(x,y)+ that is +w+ pixels wide and +h+ pixels
+tall.
+
+
+
+
+
+=== Exercises	
+
+.  Run the  code +gray_on_black.pde+ in Processing: copy the code,
+paste
+	
+.  Read the code and figure out how it works.
+
+. Try some small modifications to the code
+
+.. Make central square white.
+.. Make the background a shade of gray.
+.. Draw a square that overlaps the one that is already there.
+
+.  Write a program which produces the image of Figure B.  For
+this, it help to lay out a coordinate grid.  See Figure C.
+
+.  Layout a simple composition with rectangles of various shades
+of gray.  This can include black and white.  Do this with pencil
+and paper.  Then write a processing program to produce the same
+image.
+
+
+=== Coordinate grids
+
+The coordinate grid used by Processing is a little bit different
+than the one taught in mathematics classes.  In the figure below,
+the origin +(0,0)+ is in the upper left coordinate.  Considere a
+point sith coordianreAs +x+ increases, we move to the right, and
+in math class.  But as +y+ increases, the point moves down.
+
+[[coordinate_grid]]
+.Coordinate grid
+image::27[]
+
+
+
+
+=== Coding grayscale
+
+Shades of gray in Processing take one of 256 possible values, in
+the range 0-255.   Zero (no light) is black.  The maximum light
+(255) is pure white.
+
+=== Program structure
+
+A Processing program has the following structure
+
+----
+  ... definitions ...
+
+void setup() {
+
+  ... code ...
+
+}
+
+void draw() {
+
+  ... code ...
+
+}
+----
+The definitions and +setup+ sections are optional, though usually
+present.  The code in +setup+ is executed once, before any code is
+executed.  The code in +draw+ is executed many times a second. 
+With +setup+ alone we produce static images.  With code in +draw+,
+we produce moving images.   Note that +gray_square.pde+ has no
+definition section and no +setup+ section.
+  
+===  Composition B
+
+The tools used for Composition A are enough to carry out
+Composition B.  For more elaborate compositions you will need an
+understanding of the coordinate grid.  See below.
+
+[[checkerboard]]
+.Checkerboard
+image::29[]
+

@@ -1,0 +1,84 @@
+== Landscape
+
+
+.Landscape
+image::37[Landscape, width=400]
+
+In this lesson we learn about two things: (1) the +do-while+ loop (2) defining and using new functions.  The +do-while loop+ is another way of carrying out repetetive work.  Functions help us to structure our programs in a more efficient and logical way.  
+
+Let us see how _Landscape_, the first image on the right was constructed.  The setup function of the program sets the window size, sets the background to black, draws a figure, and saves it to a file named "landscape.jpg".  Each of these actions is achieved with a single function call.  All functions except +draw_figure+ are part of Processing.
+
+Let's study +draw_figure+.  It consists of two paragraphs.  The first sets the color used for drawing lines to red. The second defines an integer variable +t+ and sets it to zero.  The real work takes place in the second paragraph.  It consists of a loop of the form
+----
+  do { ... STATEMENTS ... } while CONDITION;
+----
+The body of the loop, +{ STATEMENTS }+, is executed over and over again, so long as CONDITION is true;  In our case the loop body causes a line to be drawn from the point +(0,t)+ on the left-hand edge of the window to the point +(t,400)+ on the bottom edge.  Then the variable +t+ is increased in value by 10 units.  These actions are repeated over and over to build up the figure.  Since the starting value of +t+ is zero, it will exceed 400 after the loop body has been executed a certain number of times.  Then the figure is complete.
+
+.*string_figure.pde*
+----
+void draw_figure() {
+
+  stroke(255,0,0);
+  int t = 0;
+
+   do { 
+    line(0, t, t, 400);
+    t = t + 10;
+  } while (t < 400);
+
+}
+
+void setup() {
+
+  size(400, 400);
+  background(0);
+  draw_figure();
+  saveFrame("landscape.jpg");
+
+}
+----
+
+
+Blah, blah
+
+----
+int k = 64;
+
+void draw_figure(int s, int r, int g, int b) {
+  stroke(r,g,b);
+ 
+  int t = 0;
+   do { 
+    line(s, t, t, 400-s);
+    t = t + 10;
+  } while (t < 400);
+}
+
+void setup() {
+
+  size(400, 400);
+  background(0);
+  
+  for(int i = 0; i < 10; i++) {
+    draw_figure(k*i,255 -25*i,0,25*i); 
+  }
+  
+  saveFrame("landscape2.jpg");
+  
+}
+----
+
+#
+
+.Landscape
+image::35[Landscape, 300, 300]
+
+Although it has a curved look, the figure above is constructed entirely with straight lines.
+
+
+.Landscape
+image::36[Landscape, 300, 300]
+
+The figure above is a superposition of ten copies of the basic figure.
+
+

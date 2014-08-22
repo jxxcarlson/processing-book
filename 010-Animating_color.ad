@@ -1,0 +1,44 @@
+== Animating color
+
+
+
+.Mood Indigo
+video::40[width=400]
+
+Size is one parameter that can be animated.  But we can animate almost anything -- position, shape, color, etc.  Here we will see how to animate color.
+
+----
+// animated_disk2.pde
+   
+float diameter = 300;
+
+void setup() {
+
+  size(400, 400);
+  background(0);
+  ellipseMode(CENTER);;
+  noStroke();
+  frameRate(10);
+  smooth();
+  
+  fill(255, 0, 0, 255);
+  ellipse(200, 200, diameter, diameter);
+
+}
+
+void draw() {
+  
+  fill(0, 0, 255, 1);
+  ellipse(200, 200, 0.97*diameter, 0.97*diameter);
+  
+  fill(0, 0, 255, 2);
+  ellipse(200, 200, 0.87*diameter, 0.87*diameter);
+  
+  fill(0, 0, 255, 255);
+  ellipse(200, 200, 0.035*diameter, 0.035*diameter);
+  
+  saveFrame("####.tif");
+}
+----
+
+

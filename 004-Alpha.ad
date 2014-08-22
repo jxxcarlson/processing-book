@@ -1,0 +1,49 @@
+== Alpha
+
+
+[[red_yellow_blue]]
+.Shades of Gray
+image::30[]
+
+
+The color or shade of gray used to fill a shape in processing can be completely opaque, as in the previous lesson, or it can have a degree of transparency, like watercolors.  The measure of transparency is calle [term]#alpha#.  It ranges from 0 to 255, with 0 being completely transparent and 255 being totally opaque.  To set an alpha value in grayscale, call the fill command like this:
+____
+fill(grayscale, alpha)
+____
+Thus +fill(255,255)+ sets up opaque white color, whereas +fill(255,120)+ sets up semi-transparent white color.
+
+
+----
+// alpha3.pde
+// Draw three squares with transparent
+// white color.
+
+void setup() {
+
+  size(400, 400);
+  background(0);
+  noStroke(); 
+  
+  fill(255,100);
+
+  rect(80,80,200,200);
+  rect(100,100,200,200);
+  rect(120,120,200,200);
+  
+  save("alpha3.png");
+}
+----
+
+
+
+=== Notes on color
+
+. (255,255,255) is white -- all three colors of light are mixed in equal amounts.
+
+. (0,0,0) is black -- there is no light at all.
+
+. (25,25,25) is a dark gray.  There is a small amount of light in equal proportions.  (25,25,55) is dark bluish gray -- there is a bit more blue than there is red or green, which are present in equal proportions.
+
+=== Notes on code
+
+This is the first time we have written code outside the +setup+ function.  It is also the first time we have used a variable.  We could have written 100 for every occurrence of +alpha+ and eliminated this variable.  But it is better to use it.  We can write +alpha = 255+ to get opaque colors everywhere rather than changing 100 to 255 three times (and in the right places).

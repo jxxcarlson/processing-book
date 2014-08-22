@@ -1,0 +1,68 @@
+== RGB
+
+
+
+
+[[red_yellow_blue]]
+.Red, Yellow, Blue
+image::32[]
+
+
+The goal of this lesson is to introduce the use of color.  For this we will use the RGBA model.  A color is coded by a quadruple of integers, R, G, B, A, which ranges from 0 to 255.  The names stand for Red, Green, Blue, and Alpha.  Thus (255,0,0,255) is an opaque red color, (255,0,0,100) is a transparent red, and (0,255,0,255) is opaque green.  Colors can be mixed.  Thus (255,255,0,255) is opaque yellow.  This may seem odd, but we are not mixing paint, which reflects light, but rather light itself -- the light emanating from the computer screen.  For opaque colors, there is an abbreviated code -- RGB instead of RGBA.  Thus (255,0,0) is the same color as (255,0,0,255).
+
+----
+// color.pde
+// Draw three squares with transparent color.
+
+int alpha = 100;
+
+void setup() {
+
+  size(400, 400);
+  background(25,25,55);
+  noStroke();
+
+  fill(255,20,0,alpha);
+  rect(40,40,200,200);
+  
+  fill(255,255,10,alpha);
+  rect(100,100,200,200);
+  
+  fill(0,0,255,alpha);
+  rect(160,160,200,200);
+
+  save("color.png");
+}
+----
+
+=== Discussion
+
+Let us read through the program.  
+
+- +float alpha = 100+  -- +alpha+ is a [term]#variable#, a kind of storage box for data.  Its [term[#value# is the integer 100.  The keyword +int+ tell Processing that +alpha+ will only hold integers.
+
+- +noStroke()+ -- suppresses the outline otherwise drawn around a shape.
+
+- We already know +fill+ and +rect+.  The only new element is that the function call for +fill+ is that takes four [term]#parameters# intead of one or two.
+
+- The function call +save("color.png")+ saves the output of the program in the image file +color.png+.
+
+
+=== Exercises
+
+. Experiment with the +alpha+ variable and take note of the results.
+
+. Create your own composition using rectangles and color.  Experiment with both opaque and transparent color.
+
+
+=== Notes on color
+
+. (255,255,255) is white -- all three colors of light are mixed in equal amounts.
+
+. (0,0,0) is black -- there is no light at all.
+
+. (25,25,25) is a dark gray.  There is a small amount of light in equal proportions.  (25,25,55) is dark bluish gray -- there is a bit more blue than there is red or green, which are present in equal proportions.
+
+=== Notes on code
+
+This is the first time we have written code outside the +setup+ function.  It is also the first time we have used a variable.  We could have written 100 for every occurrence of +alpha+ and eliminated this variable.  But it is better to use it.  We can write +alpha = 255+ to get opaque colors everywhere rather than changing 100 to 255 three times (and in the right places).

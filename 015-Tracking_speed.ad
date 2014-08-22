@@ -1,0 +1,51 @@
+== Tracking speed
+
+
+
+
+
+
+
+
+
+
+video::52[width=400]
+
+
+Adapted from http://processing.org/examples/pattern.html[processing.org/examples/pattern.html]
+
+----
+float a = 0.5;
+float k = 10;
+
+void setup() {
+  size(600, 600);
+  noStroke();
+  background(0);
+}
+
+void draw() {
+  variableEllipse(mouseX, mouseY, pmouseX, pmouseY);
+  saveFrame("frames/####.jpg");
+}
+
+void variableEllipse(int x, int y, int px, int py) {
+  float speed = abs(x-px) + abs(y-py);
+  fill(wave(600,600), 0, 50 + wave(700,175)/2, 255 - k*speed);
+  ellipse(x, y, a*speed*speed, a*speed*speed);
+}
+
+float wave(float p, float d) {
+  a = sin(PI*(frameCount - d)/p);
+  return 255*a*a;
+}
+----
+
+  // Call the variableEllipse() method and send it the
+  // parameters for the current mouse position
+  // and the previous mouse position
+
+// The simple method variableEllipse() was created specifically 
+// for this program. It calculates the speed of the mouse
+// and draws a small ellipse if the mouse is moving slowly
+// and draws a large ellipse if the mouse is moving quickly 

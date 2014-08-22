@@ -1,0 +1,110 @@
+== Random squares II
+
+
+.Screen shot from  <<random-squares-2, _Random squares II_>>
+image::38[width=400]
+
+Watch <<random-squares-2, _Random squares II_>>.  Like its predecessor, it draws colored squares at random.  However, randomness is implemented in a slightly different way.  Each time +draw+ is executed, we follow this script:
+ 
+. From the current position of the box, make a random step to the left or right, then a random step up or down.  If the box goes off the screen, bring it back in on the opposite side.
+
+. To the current value of +r+ (red) add or subtract a fixed quantity.  Do the same for +b+ (blue).
+
+. Draw a square at the new position in the new color.
+
+. Save the current frame.
+
+----
+int WIDTH = 400;
+int HEIGHT = 400;
+
+int grid_size = 10;
+int color_quantum = 5;
+int x = 100;
+int y = 100;
+int r = 100;
+int b = 255;
+
+int step() {
+  float r = random(-1,1);
+  if (r < 0) {
+    return -1;
+  }
+  else {
+    return +1;
+  }
+}
+
+int wrap(int u, int LOW, int HIGH) {
+  if (u < LOW) {
+    return HIGH;
+  } else if (u > HIGH) {
+    return LOW;
+  } else {
+    return u;
+  }
+}
+
+void setup() {
+
+  size(WIDTH,HEIGHT);
+  background(0);
+  noStroke();
+  frameRate(60);
+}
+
+void draw() {
+
+  x += grid_size*step();
+  y += grid_size*step();
+  x = wrap(x, 0, WIDTH);
+  y = wrap(y, 0, HEIGHT);
+
+  r += color_quantum*step();
+  b += color_quantum*step();
+  r = constrain(r, 0, 255);
+  b = constrain(b, 0, 255);
+
+  fill(r, 0, b);
+  rect(x,y,grid_size,grid_size);
+
+  // saveFrame("####.tif");
+}
+----
+
+
+
+.Random Squares II[[random-squares-2]]
+video::104[width=400]
+
+=== Program outline
+
+----
+Set up variables
+
+Define functions
+  - step()
+  - wrap()
+
+void setup() { ... }
+
+void draw() {
+  - Get new x, y
+  - Get new r, b
+  - Draw square
+  - Save frame
+}
+----
+
+=== Program details
+
+- The function +step()+ returns a -1 or +1 at random.
+
+- If +u < LOW+ the function +wrap(u, LOW, HIGH)+ returns +HIGH+.  If +u > HIGH+, it returns +LOW+.  Otherwise it returns +u+. 
+
+-  The function +constrain(u, LOW, HIGH)+ returns +LOW+ if +u < LOW+ return +HIGH+ if +u > HIGH+, and returns +u+ otherwise.  See http://processing.org/reference/constrain_.html[processing.org/reference].
+
+=== Variation on a theme
+
+Below is a frame from slight variation of _Random Squares II_.  What is different? How was the code modified to get this image?  Which version do you prefer?
+

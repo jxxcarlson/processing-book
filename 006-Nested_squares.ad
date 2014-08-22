@@ -1,0 +1,103 @@
+== Nested squares
+
+
+
+
+.Floating towards the Light
+image::33[]
+
+In the above image, black is represented by the RGB value 0, white by 255, and shades of gray by numbers in between.
+
+
+Our next composition, _Towards the Light_, is a sequence of nested squares, constructed like this:
+
+- Draw a black square that fills the window.  
+
+- Draw a smaller, dark gray square that is inset by the same amount on all sides.
+
+- Continue: at each step, draw a smaller lighter square.
+
+- Stop when the square is very small.
+
+
+----
+// nested_squares.pde
+
+void setup() {
+
+  size(400, 400); 
+  background(0);
+
+  // Set variables
+  float grayLevel = 0;                
+  float grayLevelChange = 25;         
+  float inset = 0;             
+  float insetChange = 20; 
+
+  // Loop      
+  for (int i = 0; i < 10; i++)     
+  {   
+
+    // Draw square
+    fill(grayLevel); 
+    rect(inset, inset, width-2*inset, height-2*inset);
+
+    // Update variables
+    grayLevel = grayLevel + grayLevelChange;
+    inset = inset + insetChange;
+    
+  }   
+}     
+----
+
+
+
+
+This program draws a sequence of nested squares.
+The outermost square is black.  The innermost square
+is white.  The squares in between are drawn in shades
+of gray.
+
+
+
+
+The program
+uses [term]#variables#
+to store information  and a [term]#loop#
+to do repetitive work.  The variable +gray+ 
+determines the shade of gray used in painting.  The program begins
+with this variable set to 0.  Each time the loop body is executed,
++gray+ is increased in value.
+
+
+
+
+The size of the square
+is determined by the value of the variable _[term]#inset#_.
+When +inset+ is zero, the square is not inset at all - it
+has dimensions [term]#width# by [term]#height#.
+The pre-defined variables +width+ and +height+
+give the dimension of the Processing window  &mdash; 400 by 400 pixels
+in this case. Each time the lopp body is executed +inset+
+is increased by the value of the variable _[term]#insetChange#_
+
+== Homework
+
+Directions:	
+
+
+	.  Run the code in Processing.
+	
+	. Read the code and figure out how it works.
+	
+	. Copy the code, then modify it to make it do something else.
+
+
+
+==== Things you learned
+
+
+  
+  . How to use variables
+  
+  . How to use a loop

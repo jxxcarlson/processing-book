@@ -1,0 +1,78 @@
+:imagesdir: images
+
+
+== What is Processing?
+
+
+.Artwork
+image::landscape2.jpg[Landscape, 200, 200, float=left]
+
+
+Processing is a language intended for visual artists or, more
+generally,
+anyone who needs to create images, whether they be graphs,
+representations of data, works of art, or something else entirely.
+Processing can be used to produce still images like the one on the
+left, moving images like
+those on the right,  and even images with which a single user or a
+live audience can interact.
+It can be used to give still or dynamic views of social networks,
+or to
+simulate physical systems, as in the _Bouncing Ball_ video. With
+the addition of libraries
+like http://code.compartmental.net/tools/minim/[minim^], 
+Processing programs can synthesize sound and music. Because the
+output of a program is immediate and visual, processing is also an
+excellent language for learning to program.
+
+An open 
+source language created by Casey Reas and Ben Fry, Processing has
+a large and active community of people who contribute to
+it in many ways.  Go to the official web site,
+http://processing.org[processing.org],
+to download the program (Linux, Mac, Windows), to see examples of
+what people
+have done with Processing’, and to consult the tutorials and 
+http://processing.org/reference[reference manual].
+
+The lessons that follow give a rapid introduction to Processing. 
+While they are by no means a complete introduction to the
+language, they should give an idea of what can be done with it. 
+For more information see http://processing.org[processing.org] or
+some of the excellent books, e.g., Daniel Shiffman's
+http://www.learningprocessing.com/[Learning Processing] and its
+segue, http://natureofcode.com/[Nature of Code].
+
+pass:[<hr />]
+
+*Examples from later in the course*
+
+.Magic marker
+video::bar1.m4v[width=400, align=center]
+
+http://vschool.herokuapp.com/lessons/131[Magic marker] was created
+by drawing with a graphics tablet.  You can also use a mouse,
+though you then have less control.  Processing tracks the stylus
+position and uses it to make square marks on the screen.
+
+#
+
+.Video: random walk
+video::random2a.m4v[width=400, align=center]
+
+
+The xlink::19[video above] was constructed using _random walk_.  A
+starting square is chosen with a starting color value.  At each
+"tick of the clock", one moves randomly up or down, left and right
+to a new square.  The color is changed by a small random amount. 
+This process -- repeatedly making small random changes to a
+quantity -- is a random walk.   Successive steps in the random
+walk are taken rapidly 24 to 60 times a second.
+
+.Video: bouncing ball
+video::bouncing_ball_1a.m4v[width=400, align=center]
+
+The video above simulates the motion of a ball dropped onto a
+small surface with a small initial velocity in the horizontal
+direction.  A discrete solution to Newton's laws of motion is used
+to "compute" the motion of the bouncing ball.

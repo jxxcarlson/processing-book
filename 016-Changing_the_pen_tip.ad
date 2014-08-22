@@ -1,0 +1,48 @@
+== Changing the pen tip
+
+
+video::53[width=400]
+
+Adapted from http://processing.org/examples/pattern.html[processing.org/examples/pattern.html]
+
+----
+float a = 0.5;
+float k = 10;
+
+float wave(float p, float d) {
+  a = sin(PI*(frameCount - d)/p);
+  return 255*a*a;
+}
+
+void setup() {
+  size(600, 600);
+  background(0);
+}
+
+
+
+void draw() {
+  figure(mouseX, mouseY, pmouseX, pmouseY);
+  saveFrame("frames/####.jpg");
+}
+
+
+void figure(int x, int y, int px, int py) {
+  
+  float dx = x - px;
+  float dy = y - py;
+  float nx = -dy;
+  float ny = dx;
+  
+  float speed = abs(x-px) + abs(y-py);
+  nx = speed*nx/k;
+  ny = speed*ny/k;
+  
+  stroke(wave(600,300),wave(500,250),0);
+  if (speed < 25) {
+    line(x + nx, y + ny, x -nx, y - ny);
+  }
+ 
+}
+----
+

@@ -1,0 +1,70 @@
+== Animating size
+
+
+
+
+.Expansion and Contraction in Red
+video::39[width=400]
+
+
+The aim of this lesson is to understand the rudiments of animation in Processing.  Watch the video _Expansion and Contraction in Red_ displayed in the right-hand column.  A small red disk expands, reaches a maximum size, and contracts until it reaches a minimum size.  The the cycle repeats, _ad infinitum_.
+
+This is the first program in which we use the +draw+ function.  It is called over an over again, at a default rate of 60 times per second. Each time the draw function is called, we do the folowing:
+
+. Draw an circle with given +diameter+ with center at the center of the 400x400 pixel window.
+
+. Increase (or decrease) the diameter by a fixed amount, namely +dimeterChange+.
+
+. If the diameter is too small or two large, change the sign of the variable +diameterChange+.  Thus, if the diameter was increasing, it will now decrease.  If it was decreasing, it will now increase.
+
+
+----
+// animated_disk1.pde
+
+  
+  float diameter = 20;
+  float minDiameter = 20;
+  float maxDiameter = 300;
+  float diameterChange = 1;
+
+void setup() {
+
+  size(400, 400);
+  background(0);
+  ellipseMode(CENTER);
+  fill(255,0,0);
+
+}
+
+void draw() {
+  
+  ellipse(200, 200, diameter, diameter);  // <1>
+  
+  diameter = diameter + diameterChange; 
+ 
+  if ((diameter >= maxDiameter) || 
+          (diameter <= minDiameter)) {
+
+    diameterChange = -diameterChange;
+
+  }
+}
+----
+
+=== Discussion
+
+- This time we make extensive use of variables -- there are four of them, all having to do with the diameter of the disk.  The variable +diameter+ is the diameter of the ellipse to be drawn.  The role of the variables +minDiameter+ and +maxDiameter+ are self-explanatory.  The variable +diameterChange+ is the amount that the ellipse changes from one drawing to the next.
+
+- The statement +ellipse(x,y,w,h)_ draws an ellipse with center +x, y+ in a box +w+ pixels wide and +h+ pixels tall.  This presupposes that we have already executed the statement + ellipseMode(CENTER)+.
+
+-  The statement +if ((diameter > = maxDiameter) || ...+ is of the form
+*+if foo { bar }+*.  The code +foo+ is something whose value is either true or false -- a so-called [term]#boolean expression#.  If +foo+ is true, then the code +bar+ is executed. The +if foo { bar }+ statement is a [term]#conditional statement#.  Conditional statements are used to make decisions.
+
+- In the +if foo { bar }+ statement, the if-clause has the form *if +A || B+*, where +A+ and +B+ are boolean expressions.  This compound expression  *+A || B+* is true
+if +A+ is true or +B+ is true.  This is an _inclusive_ or.  The expression is true +A+ and +B+ are true as well.
+
+
+
+=== Program notes
+
+. Strive to use meaningful variable names.
